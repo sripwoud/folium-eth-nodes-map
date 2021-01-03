@@ -1,5 +1,13 @@
 # Python Folium Ethereum Nodes Map
 
+## Getting Started
+
+```
+gh repo clone r1oga/folium-eth-nodes-map
+conda env create --file=environments.yml
+python map.py
+```
+
 ## Data
 
 ### Node list: [etherscan.io](https://etherscan.io/exportData?type=nodelist)
@@ -15,5 +23,41 @@ eaabac0fe2e1bc79bfd624b57ba791f279d4e38c5b93a19ae8e369d555af1178bc9dbb5bfde848d5
 ```
 
 ### IP locations: [ipwhois.io](https://ipwhois.io/)
+
+GET Endpoint : `https://ipwhois.io/json/:ip`
+
+```
+{
+  "ip": "47.242.151.65",
+  "success": true,
+  "type": "IPv4",
+  "continent": "North America",
+  "continent_code": "NA",
+  "country": "United States",
+  "country_code": "US",
+  "country_flag": "https://cdn.ipwhois.io/flags/us.svg",
+  "country_capital": "Washington",
+  "country_phone": "+1",
+  "country_neighbours": "CA,MX,CU",
+  "region": "California",
+  "city": "San Mateo",
+  "latitude": "37.5629917",
+  "longitude": "-122.3255254",
+  "asn": "AS45102",
+  "org": "Alibaba (Us) Technology Co. Ltd.",
+  "isp": "Alibaba (China) Technology Co., Ltd.",
+  "timezone": "America/Los_Angeles",
+  "timezone_name": "Pacific Standard Time",
+  "timezone_dstOffset": "0",
+  "timezone_gmtOffset": "-28800",
+  "timezone_gmt": "GMT -8:00",
+  "currency": "US Dollar",
+  "currency_code": "USD",
+  "currency_symbol": "$",
+  "currency_rates": "1",
+  "currency_plural": "US dollars",
+  "completed_requests": 5001
+}
+```
 
 ## Visualization: [folium](https://python-visualization.github.io/folium/) (python implementation of [leaflet.js](https://leafletjs.com/))
