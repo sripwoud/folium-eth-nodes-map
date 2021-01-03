@@ -1,4 +1,4 @@
-from folium import Map, CircleMarker, Popup, FeatureGroup, GeoJson
+from folium import Map, CircleMarker, Popup, FeatureGroup, GeoJson, LayerControl
 from nodes_loc import nodes_loc
 from process_world import nodes_counts_quantiles
 
@@ -10,7 +10,9 @@ def create_map(data, file_name="index.html"):
         zoom_start=2,
     )
 
-    fg = FeatureGroup(name="My Map")
+    fg_nodes_locations = FeatureGroup(name="Locations")
+    fg_nodes_counts = FeatureGroup(name="Counts")
+
     circles = [
         {
             "radius": 5,
@@ -55,7 +57,6 @@ def create_map(data, file_name="index.html"):
     ]
 
     q1, q2, q3, q4 = nodes_counts_quantiles()
-    print(q1, q2, q3, q4)
 
     def opacity(scaled_nodes_count):
         # print(scaled_nodes_count)
@@ -74,7 +75,7 @@ def create_map(data, file_name="index.html"):
         fillOpacity = opacity(feature["properties"]["scaled_nodes_count"])
         return {"fillColor": "blue", "weight": 0, "fillOpacity": fillOpacity}
 
-    fg.add_child(
+    fg_nodes_counts.add_child(
         GeoJson(
             data=open("data/enriched_world.json", encoding="utf-8-sig").read(),
             style_function=style_function,
@@ -82,9 +83,11 @@ def create_map(data, file_name="index.html"):
     )
 
     for circle in circles:
-        fg.add_child(CircleMarker(**circle))
+        fg_nodes_locations.add_child(CircleMarker(**circle))
 
-    map.add_child(fg)
+    map.add_child(fg_nodes_counts)
+    map.add_child(fg_nodes_locations)
+    map.add_child(LayerControl())
     map.save(file_name)
 
 
