@@ -1,6 +1,8 @@
 import requests
 import ast
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+
 
 
 def get_node_loc(ip):
@@ -23,6 +25,10 @@ def get_nodes_loc_df():
             data[col] = data["loc"].apply(lambda x: float(x[col]))
         else:
             data[col] = data["loc"].apply(lambda x: x[col])
+        
+    scaler = MinMaxScaler()
+    data['opacity'] = scaler.fit_transform(data[['completed_requests']])
+    
     return data
 
 

@@ -13,9 +13,10 @@ fg = FeatureGroup(name="My Map")
 circles = [
     {
         "radius": 5,
+        "stroke": False,
         "fill": True,
-        "fill_opacity": 1,
-        "color": "crimson",
+        "fill_color": "crimson",
+        "fill_opacity": opacity,
         "location": [latitude, longitude],
         "popup": Popup(
             html=f"""
@@ -47,25 +48,13 @@ circles = [
             max_width=300,
         ),
     }
-    for ip, latitude, longitude, org, completed_requests in [
+    for ip, latitude, longitude, org, completed_requests, opacity in [
         named_tuple[2:] for named_tuple in data.itertuples(index=False)
     ]
 ]
 
 for circle in circles:
-    radius, fill, fill_opacity, color, location, popup = [
-        circle[k] for k in circles[0].keys()
-    ]
-    fg.add_child(
-        CircleMarker(
-            radius=radius,
-            fill=fill,
-            fill_opacity=fill_opacity,
-            color=color,
-            location=location,
-            popup=popup,
-        )
-    )
+    fg.add_child(CircleMarker(**circle))
 
 map.add_child(fg)
 map.save("map.html")
