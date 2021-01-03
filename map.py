@@ -57,4 +57,4 @@ for circle in circles:
     fg.add_child(CircleMarker(**circle))
 
 map.add_child(fg)
-map.save("map.html")
+map.save("index.html")
