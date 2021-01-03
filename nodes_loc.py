@@ -4,7 +4,6 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 
-
 def get_node_loc(ip):
     r = requests.get(f"http://ipwhois.app/json/{ip}").json()
     return r
@@ -25,10 +24,10 @@ def get_nodes_loc_df():
             data[col] = data["loc"].apply(lambda x: float(x[col]))
         else:
             data[col] = data["loc"].apply(lambda x: x[col])
-        
+
     scaler = MinMaxScaler()
-    data['opacity'] = scaler.fit_transform(data[['completed_requests']])
-    
+    data["opacity"] = scaler.fit_transform(data[["completed_requests"]])
+
     return data
 
 
