@@ -3,7 +3,6 @@
 ## Getting Started
 
 ```
-gh repo clone r1oga/folium-eth-nodes-map
 conda env create --file=environments.yml
 python map.py
 ```
